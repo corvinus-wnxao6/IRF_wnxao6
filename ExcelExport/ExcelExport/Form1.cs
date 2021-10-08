@@ -12,9 +12,15 @@ namespace ExcelExport
 {
     public partial class Form1 : Form
     {
+        
+        List<Flat> lakasok; //= new List<Flat>();
+
+        RealEstateEntities context = new RealEstateEntities();
         public Form1()
         {
             InitializeComponent();
+            LoadData();
+            dataGridView1.DataSource = lakasok;
         }
           
         private void Form1_Load(object sender, EventArgs e)
@@ -23,7 +29,7 @@ namespace ExcelExport
         }
         public void LoadData()
         {
-
+            lakasok = context.Flats.ToList(); //itt alakítom listává, másolatot csinál az adatokból
         }
     }
 }
