@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excel= Microsoft.Office.Interop.Excel;
+using System.Reflection;
 
 namespace ExcelExport
 {
@@ -21,6 +23,10 @@ namespace ExcelExport
             InitializeComponent();
             LoadData();
             dataGridView1.DataSource = lakasok;
+
+            //Microsoft.Office.Interop.Excel.Application így kéne lehivatkozni hogy ne akadjon össze
+
+            
         }
           
         private void Form1_Load(object sender, EventArgs e)
