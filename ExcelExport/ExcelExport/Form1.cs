@@ -98,6 +98,7 @@ namespace ExcelExport
 
             //Excel magától el tudja dönteni a cella tartalmának típusát
             object[,] values = new object[lakasok.Count,headers.Length];
+                                            //lista         tömb
 
             int counter = 0;
             foreach (var lakas in lakasok)
@@ -133,6 +134,7 @@ namespace ExcelExport
             var range = xlSheet.get_Range(
                                 GetCell(2,1),
                                 GetCell(1+values.GetLength(0),values.GetLength(1))
+                                //1. dimenziója lakasok.Count, 2.D headers.Length 
                                 );
             range.Value2 = values;
         }
