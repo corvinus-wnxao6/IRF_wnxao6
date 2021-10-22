@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ValueAtRisk.Entities;
 
 namespace ValueAtRisk
 {
@@ -14,6 +15,7 @@ namespace ValueAtRisk
     {
         PortfolioEntities context = new PortfolioEntities();
         List<Tick> Ticks;
+        List<Portfolioitem> Portfolios = new List<Portfolioitem>();
 
         public Form1()
         {
@@ -21,9 +23,19 @@ namespace ValueAtRisk
 
             Ticks = context.Ticks.ToList();
             dataGridView1.DataSource = Ticks;
+
+            CreatePortfolio();
         }
 
+        private void CreatePortfolio()
+        {
 
+            Portfolios.Add(new Portfolioitem() { Index = "OTP", Volume = 10 });
+            Portfolios.Add(new Portfolioitem() { Index = "ZWACK", Volume = 10 });
+            Portfolios.Add(new Portfolioitem() { Index = "ELMU", Volume = 10 });
+
+            dataGridView2.DataSource = Portfolios;
+        }
 
 
 
