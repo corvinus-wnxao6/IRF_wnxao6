@@ -25,6 +25,12 @@ namespace ValueAtRisk
             dataGridView1.DataSource = Ticks;
 
             CreatePortfolio();
+            int elemszám = Portfolios.Count();
+            decimal részvényekÖsszege = (from x in Portfolios
+                                         select x.Volume).Sum();
+            MessageBox.Show(string.Format("Részvények száma: {0}", részvényekÖsszege));
+
+            
         }
 
         private void CreatePortfolio()
@@ -35,6 +41,21 @@ namespace ValueAtRisk
             Portfolios.Add(new Portfolioitem() { Index = "ELMU", Volume = 10 });
 
             dataGridView2.DataSource = Portfolios;
+        }
+
+        private decimal GetPortfolioValue(DateTime date)
+        {
+            decimal value = 0;
+            foreach (var item in Portfolios)
+            {
+                var last = (from x in Ticks
+                            where item.Index == x.Index.Trim()
+                               && date <= x.TradingDay
+                            select x)
+                            .First();
+                value += (decimal)last.Price * item.Volume;
+            }
+            return value;
         }
 
 
