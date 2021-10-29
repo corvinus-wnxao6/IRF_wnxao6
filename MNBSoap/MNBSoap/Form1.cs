@@ -21,6 +21,23 @@ namespace MNBSoap
             string xmlstring=Consume();
             LoadXml(xmlstring);
             dataGridView1.DataSource = Rates;
+            Charting();
+        }
+
+        private void Charting()
+        {
+            chartRateData.DataSource = Rates;
+            var series = chartRateData.Series[0]; //Series=hány vonal
+            series.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series.XValueMember = "Date";
+            series.YValueMembers = "Value";
+            series.BorderWidth = 2;
+            var chartArea = chartRateData.ChartAreas[0];
+            chartArea.AxisX.MajorGrid.Enabled = false;
+            chartArea.AxisY.MajorGrid.Enabled = false;
+            chartArea.AxisY.IsStartedFromZero = false;
+            var legend = chartRateData.Legends[0];
+            legend.Enabled = false;
         }
 
         private void LoadXml(string input)
