@@ -72,7 +72,7 @@ namespace MNBSoap
                 r.Date = DateTime.Parse(item.GetAttribute("date"));
                 XmlElement child = (XmlElement)item.FirstChild;
                 if (child == null) continue;
-                r.Currency = child.GetAttribute("curr");
+                r.Currency = child.GetAttribute("curr");    //filterChanges a porp ValueChanged-nél, SelectedItemChanged 
                 r.Value = decimal.Parse(child.InnerText);
                 int unit = int.Parse(child.GetAttribute("unit"));
                 if (unit != 0)
@@ -100,6 +100,11 @@ namespace MNBSoap
         //}
 
         private void comboBoxValuta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void filterChanged(object sender, EventArgs e)
         {
             RefreshData();
         }
