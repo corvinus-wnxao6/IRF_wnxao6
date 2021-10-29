@@ -13,11 +13,12 @@ namespace MNBSoap
 {
     public partial class Form1 : Form
     {
-        
+        BindingList<RateData> Rates = new BindingList<RateData>();
         public Form1()
         {
             InitializeComponent();
             Consume();
+            dataGridView1.DataSource = Rates;
         }
 
         void Consume()
@@ -27,6 +28,9 @@ namespace MNBSoap
             request.currencyNames = "EUR";
             request.startDate = "2020-01-01";
             request.endDate = "2020-06-30";
+            var response=mnbService.GetExchangeRates(request);
+            string result=response.GetExchangeRatesResult;
+            
         }
     }
 }
