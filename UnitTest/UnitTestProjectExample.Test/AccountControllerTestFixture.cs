@@ -62,6 +62,7 @@ namespace UnitTestExample.Test
 
             //Act
             var result = accountController.Register(email,password);
+            accountController.AccountManager.Accounts.Contains(result);
 
             //Assert
             Assert.AreEqual(email,result.Email);
